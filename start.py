@@ -10,5 +10,6 @@ class MyMainWindow(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     mainwindow = MyMainWindow()
+    mainwindow.setWindowTitle("Marscroft")
     mainwindow.show()
     app.exec_()
