@@ -67,7 +67,6 @@ class MyMainWindow(QMainWindow):
         layout.setAlignment(grid_widget, Qt.AlignHCenter)
         layout.setAlignment(Qt.AlignVCenter)
         self.setCentralWidget(widget)
-
         self.timer = QTimer()
         self.timer.setInterval(370)
         self.connect(self.timer, SIGNAL("timeout()"), self.update_labels)
@@ -80,15 +79,18 @@ class MyMainWindow(QMainWindow):
         self.labelMonth.setText(QString.number(mTime.getMonth()))
         self.labelDay.setText(QString.number(mTime.getSol()))
 
-    def get_martian_date_string(self):
-        mTime = Mars_time(float(time.time()))
-        return QString("%1-%3-%2").arg(mTime.getYear()).arg(mTime.getSol()).arg(
-            mTime.getMonth())
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     mainwindow = MyMainWindow()
     mainwindow.setWindowTitle("Marscroft")
-    mainwindow.showFullScreen()
+
+    rec = QDesktopWidget().screenGeometry()
+    height = rec.height()
+    width = rec.width()
+    if height <= 600 and width <= 800:
+        mainwindow.showFullScreen()
+    else:
+        mainwindow.setFixedSize(800, 600)
+        mainwindow.show()
     app.exec_()
