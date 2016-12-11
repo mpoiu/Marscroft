@@ -17,8 +17,11 @@ class MyMainWindow(QMainWindow):
         self.label.setFont(font)
         label = QLabel("Hello from Mars")
         label.setFont(font)
+        label.setStyleSheet("QLabel { color: white }")
+        self.label.setStyleSheet("QLabel { color: white }")
 
         widget = QWidget(self)
+        widget.setStyleSheet("QWidget { background-color: orange }")
         layout = QVBoxLayout(widget)
         layout.addWidget(label)
         layout.addWidget(self.label)
