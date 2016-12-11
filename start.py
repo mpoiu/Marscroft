@@ -30,7 +30,7 @@ class MyMainWindow(QMainWindow):
         self.labelDay = QLabel()
         labelYearS = QLabel("Year")
         labelMonthS = QLabel("Month")
-        labelDayS = QLabel("Day")
+        labelDayS = QLabel("Sol")
 
         font = self.labelHour.font()
         font.setPointSize(90)
