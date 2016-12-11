@@ -84,6 +84,10 @@ class MyMainWindow(QMainWindow):
         widget = QWidget(self)
         widget.setStyleSheet("QWidget { background-color: #FF6625 }")
         layout = QVBoxLayout(widget)
+        button = QPushButton("Autodestruction")
+        button.setStyleSheet("QPushButton{color:white;background-color:black}")
+        layout.addWidget(button)
+        layout.setAlignment(button, Qt.AlignRight | Qt.AlignTop)
         layout.addWidget(self.labelHour)
         layout.addWidget(grid_widget)
         myFrame = QFrame()
@@ -148,7 +152,6 @@ class MyMainWindow(QMainWindow):
         else:
             wind_speed_string.append("No data")
         self.label_wind_speed.setText(wind_speed_string)
-
 
 
 if __name__ == '__main__':
