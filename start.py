@@ -11,38 +11,43 @@ import time
 class MyMainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
-        self.label = QLabel()
-        font = self.label.font()
+        self.label1 = QLabel()
+        self.label2 = QLabel()
+        font = self.label1.font()
         font.setPointSize(35)
-        self.label.setFont(font)
-        label = QLabel("Hello from Mars")
-        label.setFont(font)
-        label.setStyleSheet("QLabel { color: white }")
-        self.label.setStyleSheet("QLabel { color: white }")
+        self.label1.setFont(font)
+        self.label2.setFont(font)
+        style = "QLabel { color: white }"
+        self.label1.setStyleSheet(style)
+        self.label2.setStyleSheet(style)
 
         widget = QWidget(self)
         widget.setStyleSheet("QWidget { background-color: orange }")
         layout = QVBoxLayout(widget)
-        layout.addWidget(label)
-        layout.addWidget(self.label)
-        layout.setAlignment(self.label, Qt.AlignHCenter)
-        layout.setAlignment(label, Qt.AlignHCenter)
+        layout.addWidget(self.label1)
+        layout.addWidget(self.label2)
+        layout.setAlignment(self.label1, Qt.AlignHCenter)
+        layout.setAlignment(self.label2, Qt.AlignHCenter)
         layout.setAlignment(Qt.AlignVCenter)
         self.setCentralWidget(widget)
 
         self.timer = QTimer()
         self.timer.setInterval(370)
-        self.connect(self.timer, SIGNAL("timeout()"), self.update_label)
+        self.connect(self.timer, SIGNAL("timeout()"), self.update_labels)
         self.timer.start()
 
-    def update_label(self):
-        myTime = Mars_time(float(time.time()))
-        self.label.setText(self.get_martian_time_string())
+    def update_labels(self):
+        self.label1.setText(self.get_martian_hour_string())
+        self.label2.setText(self.get_martian_date_string())
 
-    def get_martian_time_string(self):
+    def get_martian_date_string(self):
         mTime = Mars_time(float(time.time()))
-        return QString("Year %1 Month %3 Sol %2 Hour %4").arg(mTime.getYear()).arg(mTime.getSol()).arg(
-            mTime.getMonth()).arg(QString.number(mTime.getHour(), 'f', 4))
+        return QString("%1-%3-%2").arg(mTime.getYear()).arg(mTime.getSol()).arg(
+            mTime.getMonth())
+
+    def get_martian_hour_string(self):
+        mTime = Mars_time(float(time.time()))
+        return QString.number(mTime.getHour(), 'f', 4)
 
 
 if __name__ == '__main__':
