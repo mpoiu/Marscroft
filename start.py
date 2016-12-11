@@ -22,8 +22,9 @@ class MyMainWindow(QMainWindow):
         labelDayS = QLabel("Day")
 
         font = self.labelHour.font()
-        font.setPointSize(70)
+        font.setPointSize(120)
         self.labelHour.setFont(font)
+        font.setPointSize(70)
         self.labelYear.setFont(font)
         labelDash1.setFont(font)
         self.labelMonth.setFont(font)
@@ -58,7 +59,7 @@ class MyMainWindow(QMainWindow):
         grid_layout.addWidget(labelDayS, 1, 4)
 
         widget = QWidget(self)
-        widget.setStyleSheet("QWidget { background-color: orange }")
+        widget.setStyleSheet("QWidget { background-color: #FF6625 }")
         layout = QVBoxLayout(widget)
         layout.addWidget(self.labelHour)
         layout.addWidget(grid_widget)
