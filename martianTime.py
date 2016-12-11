@@ -5,7 +5,7 @@ class Mars_time:
         self.Y = 668.6*88775.245
         self.East = 137.4417
         self.TZone = (self.East/360)*88775.245
-        self.M_time = (time+464731200)+self.TZone
+        self.M_time = (time+464731200) + self.TZone
         self.__Year = self.M_time//self.Y + 1
         self.__s = ((self.M_time-((self.__Year-1)*self.Y))//88775.245)
         self.__SolY = self.__s+1
