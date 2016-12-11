@@ -7,6 +7,7 @@ from PyQt4.QtCore import Qt
 from PyQt4.QtGui import *
 from martianTime import Mars_time
 import time
+import logging
 
 from martianWeather import MarsWeather
 
@@ -14,6 +15,13 @@ from martianWeather import MarsWeather
 class MyMainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
+
+        logging.basicConfig(filename='start.log', level=logging.INFO)
+
+        logging.info('init MyMainWindow')
+
+        # time widget
+
         self.labelHour = QLabel()
         self.labelYear = QLabel()
         labelDash1 = QLabel("-")
@@ -102,14 +110,20 @@ class MyMainWindow(QMainWindow):
 
         self.setCentralWidget(widget)
 
+        self.update_weather()
+        self.update_labels()
+
+        logging.info('initializing timers')
+
         self.timer = QTimer()
         self.timer.setInterval(370)
         self.connect(self.timer, SIGNAL("timeout()"), self.update_labels)
         self.timer.start()
 
         self.weather_timer = QTimer()
+        # 5 min
         self.weather_timer.setInterval(300000)
-        self.connect(self.timer, SIGNAL("timeout()"), self.update_weather)
+        self.connect(self.weather_timer, SIGNAL("timeout()"), self.update_weather)
         self.weather_timer.start()
 
     def update_labels(self):
@@ -120,6 +134,7 @@ class MyMainWindow(QMainWindow):
         self.labelDay.setText(QString.number(mTime.getSol()))
 
     def update_weather(self):
+        logging.info('update_weather')
         weather = MarsWeather()
         min_temp = weather.getMinTemp()
         min_temp_string = QString("Min. Temp: ")
