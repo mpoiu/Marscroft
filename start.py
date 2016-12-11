@@ -83,19 +83,28 @@ class MyMainWindow(QMainWindow):
         self.label_max_temp.setFont(font)
         self.label_pressure.setFont(font)
         self.label_wind_speed.setFont(font)
-        grid_weather.addWidget(self.label_min_temp, 0, 0)
-        grid_weather.addWidget(self.label_max_temp, 0, 1)
-        grid_weather.addWidget(self.label_pressure, 1, 0)
-        grid_weather.addWidget(self.label_wind_speed, 1, 1)
+        grid_weather.addWidget(self.label_min_temp, 0, 1)
+        grid_weather.addWidget(self.label_max_temp, 0, 2)
+        grid_weather.addWidget(self.label_pressure, 1, 1)
+        grid_weather.addWidget(self.label_wind_speed, 1, 2)
         grid_weather.setSpacing(20)
 
         widget = QWidget(self)
         widget.setStyleSheet("QWidget { background-color: #FF6625 }")
         layout = QVBoxLayout(widget)
-        button = QPushButton("Autodestruction")
-        button.setStyleSheet("QPushButton{color:white;background-color:black}")
-        layout.addWidget(button)
-        layout.setAlignment(button, Qt.AlignRight | Qt.AlignTop)
+
+        buttonRight = QPushButton("BOOM!")
+        buttonRight.setStyleSheet("QPushButton{color:white;background-color:black;border-radius: 40px;width: 80px;height: 80px;}")
+        grid_weather.addWidget(buttonRight, 1, 3)
+        layout.setAlignment(buttonRight, Qt.AlignRight | Qt.AlignBottom)
+        buttonRight.clicked.connect(self.button_clicked)
+
+        buttonLeft = QPushButton("BOOM!")
+        buttonLeft.setStyleSheet("QPushButton{color:white;background-color:black;border-radius: 40px;width: 80px;height: 80px;}")
+        grid_weather.addWidget(buttonLeft, 1, 0)
+        layout.setAlignment(buttonLeft, Qt.AlignRight | Qt.AlignBottom)
+        buttonLeft.clicked.connect(self.button_clicked)
+
         layout.addWidget(self.labelHour)
         layout.addWidget(grid_widget)
         myFrame = QFrame()
@@ -125,6 +134,9 @@ class MyMainWindow(QMainWindow):
         self.weather_timer.setInterval(300000)
         self.connect(self.weather_timer, SIGNAL("timeout()"), self.update_weather)
         self.weather_timer.start()
+
+    def button_clicked(self):
+        logging.info('button clicked')
 
     def update_labels(self):
         mTime = Mars_time(float(time.time()))
