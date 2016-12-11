@@ -33,9 +33,9 @@ class MyMainWindow(QMainWindow):
         labelDayS = QLabel("Day")
 
         font = self.labelHour.font()
-        font.setPointSize(100)
+        font.setPointSize(90)
         self.labelHour.setFont(font)
-        font.setPointSize(60)
+        font.setPointSize(55)
         self.labelYear.setFont(font)
         labelDash1.setFont(font)
         self.labelMonth.setFont(font)
@@ -98,12 +98,12 @@ class MyMainWindow(QMainWindow):
 
         buttonRight = QPushButton("BOOM!")
         buttonRight.setStyleSheet(
-            "QPushButton{color:white;background-color:black;border-radius: 40px;width: 80px;height: 80px;}")
+            "QPushButton{color:#FF6625;background-color:white;border-radius: 40px;width: 80px;height: 80px;font-weight:bold;font-size:15px}")
         buttonRight.clicked.connect(self.button_clicked)
 
         buttonLeft = QPushButton("BOOM!")
         buttonLeft.setStyleSheet(
-            "QPushButton{color:white;background-color:black;border-radius: 40px;width: 80px;height: 80px;}")
+            "QPushButton{color:#FF6625;background-color:white;border-radius: 40px;width: 80px;height: 80px;font-weight:bold;font-size:15px}")
         buttonLeft.clicked.connect(self.button_clicked)
 
         h_layout.addWidget(buttonLeft)
