@@ -146,6 +146,7 @@ class MyMainWindow(QMainWindow):
 
     def button_clicked(self):
         logging.info('button clicked')
+        QApplication.closeAllWindows()
 
     def update_labels(self):
         mTime = Mars_time(float(time.time()))
