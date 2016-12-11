@@ -12,11 +12,19 @@ class MyMainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
         self.label = QLabel()
+        font = self.label.font()
+        font.setPointSize(35)
+        self.label.setFont(font)
+        label = QLabel("Hello from Mars")
+        label.setFont(font)
 
         widget = QWidget(self)
         layout = QVBoxLayout(widget)
+        layout.addWidget(label)
         layout.addWidget(self.label)
-        layout.setAlignment(Qt.AlignCenter)
+        layout.setAlignment(self.label, Qt.AlignHCenter)
+        layout.setAlignment(label, Qt.AlignHCenter)
+        layout.setAlignment(Qt.AlignVCenter)
         self.setCentralWidget(widget)
 
         self.timer = QTimer()
@@ -26,7 +34,7 @@ class MyMainWindow(QMainWindow):
 
     def update_label(self):
         myTime = Mars_time(float(time.time()))
-        self.label.setText(QString("Hello from Mars %1").arg(self.get_martian_time_string()))
+        self.label.setText(self.get_martian_time_string())
 
     def get_martian_time_string(self):
         mTime = Mars_time(float(time.time()))
